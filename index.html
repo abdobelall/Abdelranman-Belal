@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Abdelrahman Belall — Portfolio</title>
+    <link rel="icon" type="image/png" href="./Image.png">
+    <style>
+        :root {
+            --bg1: #e6f0ff;
+            --bg2: #f1fff4;
+            --accent: #0d883a;
+            --card: #ffffffcc;
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --text: #0f1724;
+            --muted: #55606a;
+        }
+
+        textarea {
+            width: 90%;
+            min-height: 100px;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ccc;
+            border-radius: 20px;
+            font-size: 16px;
+            resize: vertical;
+            /* المستخدم يقدر يغير الطول فقط */
+            transition: 0.3s;
+        }
+
+        textarea:focus {
+            border-color: #4a90e2;
+            outline: none;
+            box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #4a90e2;
+            outline: none;
+            box-shadow: 0 0 8px rgba(74, 144, 226, 0.5);
+        }
+
+        [data-theme="dark"] {
+            --bg1: #071018;
+            --bg2: #0b0f12;
+            --accent: #17c964;
+            --card: rgba(20, 20, 20, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.04);
+            --text: #e6eef5;
+            --muted: #9aa6b0;
+        }
+
+        :root {
+            --bg-color: #fff;
+            --text-color: #000;
+        }
+
+        body.dark {
+            --bg-color: #111;
+            --text-color: #eee;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        .card {
+            background: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, "Segoe UI", Tahoma, sans-serif;
+            color: var(--text);
+            background: linear-gradient(135deg, var(--bg1), var(--bg2));
+            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
+        }
+
+        /* scroll progress */
+        #progressBar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), #00c46b);
+            width: 0;
+            z-index: 9999;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Container */
+        .wrap {
+            max-width: 1100px;
+            margin: 36px auto;
+            padding: 0 18px;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px
+        }
+
+        .brand {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .text,
+        .email,
+        .message {
+            width: 20px auto;
+            height: 20px auto;
+        }
+
+        .avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 3px solid var(--glass-border);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08)
+        }
+
+        .brand h1 {
+            font-size: 1.15rem;
+            margin: 0
+        }
+
+        .controls {
+            display: flex;
+            gap: 8px;
+            align-items: center
+        }
+
+        .btn,
+        .chip {
+            cursor: pointer;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 10px;
+            background: var(--card);
+            backdrop-filter: blur(6px);
+            box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            color: var(--text);
+            text-decoration: none
+        }
+
+        .chip.small {
+            padding: 6px 8px;
+            font-size: .95rem
+        }
+
+        .btn:hover {
+            transform: translateY(-3px)
+        }
+
+        .icon {
+            font-size: 1rem;
+            opacity: .9
+        }
+
+        /* Hero */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 18px;
+            align-items: center;
+            margin: 6px 0 22px
+        }
+
+        .hero-left h2 {
+            margin: 0;
+            font-size: 1.9rem;
+            color: var(--text);
+            /* make hero title follow variable */
+        }
+
+        .hero-left p {
+            color: var(--muted);
+            margin-top: 8px
+        }
+
+        .hero-actions {
+            margin-top: 14px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .download:hover {
+            transform: translateY(-3px)
+        }
+
+        /* Search + Filters */
+        .tools {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin: 18px 0;
+            flex-wrap: wrap
+        }
+
+        .search {
+            flex: 1;
+            display: flex;
+            gap: 8px
+        }
+
+        .search input {
+            flex: 1;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            background: transparent
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .filter {
+            padding: 8px 12px;
+            border-radius: 10px;
+            background: transparent;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            cursor: pointer
+        }
+
+        .filter.active {
+            background: linear-gradient(90deg, var(--accent), #00c46b);
+            color: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.06)
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px
+        }
+
+        :root {
+            --bg1: #e6f0ff;
+            --bg2: #ffffff;
+            --text: #000000;
+            --muted: #555555;
+            --card: #f2f2f2;
+        }
+
+
+        [data-theme="dark"] {
+            --bg1: #121212;
+            --bg2: #1e1e1e;
+            --text: #f5f5f5;
+            --muted: #cccccc;
+            --card: #2a2a2a;
+        }
+
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: var(--bg1);
+            color: var(--text);
+            transition: background 0.3s, color 0.3s;
+        }
+
+
+        header {
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card);
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 12px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            box-shadow: 0 8px 24px rgba(11, 20, 30, 0.06);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border);
+            transform: translateY(0);
+            opacity: 1;
+            transition: transform .35s ease, box-shadow .25s ease, opacity .35s;
+            margin-top: 20px;
+        }
+
+        .card.hidden {
+            opacity: 0;
+            transform: translateY(12px);
+            pointer-events: none
+        }
+
+        .card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px
+        }
+
+        .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .project-title {
+            font-weight: 700;
+            font-size: 1.02rem;
+            margin-bottom: 6px
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(to right, #e0f7fa, #f1f8e9);
+            padding: 20px 0;
+            text-align: center;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin: 0;
+            color: #333;
+        }
+
+        .header .subtitle {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .header .nav {
+            margin-top: 15px;
+        }
+
+        .header .nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: 500;
+            color: #00796b;
+            transition: 0.3s;
+        }
+
+
+        .header .nav a:hover {
+            color: #004d40;
+        }
+
+        /* About Me Section */
+        .about {
+            background: var(--card);
+            /* use variable so dark theme affects it */
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        /* ===== ABOUT ===== */
+        #about {
+            padding: 60px 20px;
+            background: var(--bg1);
+        }
+
+        .about-content {
+            display: flex;
+            gap: 30px;
+            max-width: 900px;
+            align-items: center;
+            background: var(--card);
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--glass-border);
+        }
+
+        .about-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 20px;
+            object-fit: cover;
+            border: 4px solid var(--accent);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-content h2 {
+            font-size: 2rem;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+
+        .about-content p {
+            line-height: 1.6;
+            font-size: 1.1rem;
+            color: var(--text);
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .about h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: var(--text);
+            /* follow theme */
+        }
+
+        .about p {
+            color: var(--muted);
+            /* follow theme */
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .about .highlights {
+            list-style: none;
+            padding: 0;
+        }
+
+        .about .highlights li {
+            margin-bottom: 8px;
+            font-size: 1rem;
+            color: var(--text);
+            /* follow theme */
+        }
+
+        .project-desc {
+            color: var(--muted);
+            font-size: .96rem;
+            margin-bottom: 4px
+        }
+
+        .tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap
+        }
+
+        .tag {
+            font-size: .82rem;
+            padding: 6px 8px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.05)
+        }
+
+        .card .actions {
+            display: flex;
+            gap: 8px;
+            margin-top: auto
+        }
+
+        .btn.small {
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: .95rem
+        }
+
+        .btn.ghost {
+            background: transparent;
+            border: 1px solid rgba(0, 0, 0, 0.08)
+        }
+
+        /* Skills & Achievements */
+        .row {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 18px
+        }
+
+        .panel {
+            flex: 1;
+            min-width: 260px
+        }
+
+        .progress {
+            height: 12px;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.04), rgba(255, 255, 255, 0.02));
+            border-radius: 999px;
+            overflow: hidden
+        }
+
+        .progress>i {
+            display: block;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--accent), #00c46b);
+            transition: width 1.6s ease
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 18px
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--accent), #00c46b);
+            border-radius: 3px
+        }
+
+        .step {
+            position: relative;
+            padding: 10px 12px;
+            margin-bottom: 12px;
+            text-decoration: none;
+        }
+
+        .step::before {
+            content: "";
+            position: absolute;
+            left: -10px;
+            top: 12px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--card);
+            border: 2px solid var(--glass-border);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06)
+        }
+
+        /* Testimonials */
+        .testi {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px
+        }
+
+        .bubble {
+            background: var(--card);
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid var(--glass-border)
+        }
+
+        /* Footer */
+        footer {
+            margin: 36px 0 60px;
+            text-align: center;
+            color: var(--muted);
+            font-size: .95rem
+        }
+
+        /* Responsive */
+        @media (max-width:720px) {
+            .hero {
+                grid-template-columns: 1fr
+            }
+
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px
+            }
+
+            .controls {
+                align-self: stretch;
+                justify-content: space-between
+            }
+        }
+
+        /* small anim */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity .6s ease, transform .6s ease
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: none
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="progressBar"></div>
+
+    <div class="wrap" id="page">
+        <header>
+            <div class="brand">
+                <img src="./1000263882.jpg" alt="avatar" class="avatar" id="avatar">
+                <div>
+                    <h1 id="name">Abdelrahman Belall</h1>
+                    <div style="font-size:.92rem;color:var(--muted)" id="subtitle">Grade 6 Student • Young Programmer
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls">
+                <button class="chip small" id="langBtn" title="Toggle language">AR</button>
+                <button class="chip small" id="themeBtn" title="Toggle theme">🌙</button>
+                <a class="btn" id="downloadCV" href="./Abdelrahman_Belall_CV.pdf" download>📥 Download CV</a>
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-left">
+                <h2 id="heroTitle">Hi, I'm <span id="heroName">Abdelrahman</span></h2>
+                <div class="typing" id="typingLine" style="font-weight:600;color:var(--muted);height:28px"></div>
+                <p id="heroText">I build useful and fun web apps. I love learning new technologies and solving problems.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="btn download" id="contactBtn" href="#contact">📩 Contact Me</a>
+                    <a class="chip" id="projectsBtn">See Projects</a>
+                </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:10px;align-items:center">
+                <div
+                    style="width:220px;background:var(--card);border-radius:12px;padding:12px;text-align:center;border:1px solid var(--glass-border)">
+                    <div style="font-weight:800;font-size:1.35rem" id="bigStat">45+</div>
+                    <div style="color:var(--muted)">Projects</div>
+                </div>
+                <div style="margin-top:6px;color:var(--muted);font-size:.95rem;text-align:center">
+                    <div id="location">🌍 Egypt</div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Tools -->
+        <div class="tools fade-in" id="toolsRow">
+            <div class="search">
+                <input id="searchInput" placeholder="Search projects..." />
+                <button class="btn small" id="clearSearch">✖</button>
+            </div>
+            <div class="filters" id="filters">
+                <button class="filter active" data-filter="all">All</button>
+                <button class="filter" data-filter="apps">Apps</button>
+                <button class="filter" data-filter="games">Games</button>
+                <button class="filter" data-filter="tools">Tools</button>
+            </div>
+        </div>
+
+        <!-- About Me Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <h2 id="aboutTitle">👋 About Me</h2>
+                <p id="aboutDesc">
+                    Hi, I'm Abdelrahman, a passionate young programmer from Egypt.
+                    I love building web apps, learning new technologies, and solving challenges.
+                    My dream is to become a professional Software Engineer and inspire other young people to code.
+                </p>
+                <ul class="highlights">
+                    <li>💡 Love solving problems</li>
+                    <li>📚 Always learning new things</li>
+                    <li>🌐 Experienced with HTML, CSS, JavaScript, React</li>
+                </ul>
+            </div>
+        </section>
+
+
+        <!-- Projects Grid -->
+        <section class="fade-in" id="projectsSection">
+            <h2 id="projectsTitle">Some Projects</h2>
+            <div class="grid" id="projectsGrid"></div>
+        </section>
+
+        <!-- Skills + Achievements -->
+        <section class="card fade-in" id="skillsAchievements">
+            <div class="row">
+                <div class="panel">
+                    <h3 style="margin-top:0">Skills</h3>
+                    <div style="margin-bottom:8px"><strong>HTML</strong></div>
+                    <div class="progress"><i data-width="95%"></i></div>
+                    <div style="margin-top:8px"><strong>CSS</strong></div>
+                    <div class="progress"><i data-width="100%"></i></div>
+                    <div style="margin-top:8px"><strong>JavaScript</strong></div>
+                    <div class="progress"><i data-width="90%"></i></div>
+                </div>
+                <div class="panel">
+                    <h3 style="margin-top:0">Achievements</h3>
+                    <div style="display:flex;gap:8px;align-items:center">
+                        <div style="flex:1">
+                            <div style="font-size:22px;font-weight:800" id="statProjects">45</div>
+                            <div style="color:var(--muted)">Projects</div>
+                        </div>
+                        <div style="flex:1">
+                            <div style="font-size:22px;font-weight:800" id="statSkills">0</div>
+                            <div style="color:var(--muted)">Skills</div>
+                        </div>
+                        <div style="flex:1">
+                            <div style="font-size:22px;font-weight:800" id="statCert">0</div>
+                            <div style="color:var(--muted)">Certificates</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline -->
+        <section class="card fade-in">
+            <h2 id="timelineTitle">My Learning Journey</h2>
+            <div class="timeline" id="timeline">
+                <div class="step"><strong>2023</strong>
+                    <div style="color:var(--muted)">Started learning HTML & CSS basics</div>
+                </div>
+                <div class="step"><strong>2024</strong>
+                    <div style="color:var(--muted)">Mastered JavaScript and built small apps</div>
+                </div>
+                <div class="step"><strong>2025</strong>
+                    <div style="color:var(--muted)">Dived into React, Git & GitHub, built 45+ projects</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="card fade-in">
+            <h2 id="testiTitle">Testimonials</h2>
+            <div class="testi">
+                <div class="bubble">"Abdelrahman is one of the most talented young programmers I've ever seen!" <div
+                        style="margin-top:8px;font-weight:700">— Teacher</div>
+                </div>
+                <div class="bubble">"He builds clean and useful apps. Very impressive!" <div
+                        style="margin-top:8px;font-weight:700">— Friend</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section class="card fade-in" id="contact">
+            <h2 id="contactTitle">Contact</h2>
+            <form id="contactForm" action="https://formspree.io/f/yourFormID" method="POST">
+                <div class="tem">
+                    <input type="text" name="name" placeholder="Your Name" required />
+                    <input type="email" name="email" placeholder="Your Email" required />
+                    <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+                </div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                    <button type="submit" class="btn">Send Message</button>
+                    <a class="btn ghost" id="githubLink" href="https://github.com/abdo_belall"
+                        target="_blank">GitHub</a>
+                </div>
+            </form>
+        </section>
+
+        <!-- Promotional Video (آخر الصفحة قبل الفوتر) -->
+        <section class="card fade-in" id="promoVideoSection">
+            <h2 id="promoTitle">Promotional Video</h2>
+            <div>
+                <!-- ضع ملف الفيديو باسم promo.mp4 في نفس مجلد المشروع أو غيّر src حسب مكان الملف -->
+                <video controls style="width:100%;border-radius:12px;overflow:hidden">
+                    <source src="promo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </section>
+
+        <footer>© 2025 Abdelrahman Belall • All Rights Reserved</footer>
+    </div>
+
+    <script>
+        /***** Data (easily editable) *****/
+        const PROJECTS = [
+            { id: 1, title_en: "Weather App", title_ar: "تطبيق الطقس", desc_en: "Real-time weather with API", desc_ar: "تحديثات الطقس لحظية باستخدام API", img: "https://via.placeholder.com/600x360?text=Weather+App", category: "apps", demo: "#", github: "#" },
+            { id: 2, title_en: "Image Editor", title_ar: "محرر الصور", desc_en: "Crop, filter and edit images", desc_ar: "قص وتعديل وتطبيق فلاتر على الصور", img: "https://via.placeholder.com/600x360?text=Image+Editor", category: "tools", demo: "#", github: "#" },
+            { id: 3, title_en: "Music Player", title_ar: "مشغل موسيقى", desc_en: "Play & manage songs", desc_ar: "تشغيل وإدارة المقاطع الصوتية", img: "https://via.placeholder.com/600x360?text=Music+Player", category: "apps", demo: "#", github: "#" },
+            { id: 4, title_en: "Quiz App", title_ar: "تطبيق أسئلة", desc_en: "Fun interactive quizzes", desc_ar: "اختبارات تفاعلية ممتعة", img: "https://via.placeholder.com/600x360?text=Quiz+App", category: "games", demo: "#", github: "#" },
+            { id: 5, title_en: "AI Image Generator", title_ar: "مولّد صور بالذكاء الاصطناعي", desc_en: "Create images from prompts", desc_ar: "إنشاء صور من أوصاف نصية", img: "https://via.placeholder.com/600x360?text=AI+Generator", category: "tools", demo: "#", github: "#" }
+        ];
+
+        /***** State & DOM refs *****/
+        let LANG = localStorage.getItem("lang") || "en"; // 'en' or 'ar'
+        const page = document.getElementById("page");
+        const projectsGrid = document.getElementById("projectsGrid");
+        const filters = document.getElementById("filters");
+        const searchInput = document.getElementById("searchInput");
+        const langBtn = document.getElementById("langBtn");
+        const themeBtn = document.getElementById("themeBtn");
+        const progressBar = document.getElementById("progressBar");
+        const downloadCV = document.getElementById("downloadCV");
+
+        /***** Theme handling *****/
+        const savedTheme = localStorage.getItem("mode");
+        if (savedTheme === "dark") { document.documentElement.setAttribute("data-theme", "dark"); themeBtn.textContent = "☀️"; }
+        else { document.documentElement.setAttribute("data-theme", "light"); themeBtn.textContent = "🌙"; }
+        themeBtn.addEventListener("click", () => {
+            const now = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", now);
+            localStorage.setItem("mode", now);
+            themeBtn.textContent = now === "dark" ? "☀️" : "🌙";
+        });
+
+        /***** Language handling *****/
+        function applyLanguage() {
+            // Update texts for EN / AR
+            if (LANG === "ar") {
+                document.documentElement.lang = "ar";
+                document.documentElement.dir = "rtl";
+                langBtn.textContent = "EN";
+                document.getElementById("name").textContent = "عبدالرحمن بلال";
+                document.getElementById("subtitle").textContent = "الصف السادس • مبرمج شاب";
+
+                // hero: keep heroName span present (use innerHTML)
+                const heroNameEl = document.getElementById("heroName");
+                const heroNameText = heroNameEl ? heroNameEl.textContent || 'عبدالرحمن' : 'عبدالرحمن';
+                document.getElementById("heroTitle").innerHTML = `مرحبًا، أنا <span id="heroName">${heroNameText}</span>`;
+                document.getElementById("heroText").textContent = "أبني تطبيقات مفيدة وممتعة. أحب تعلم تقنيات جديدة وحل المشكلات.";
+
+                // About
+                const aboutTitle = document.getElementById("aboutTitle");
+                const aboutDesc = document.getElementById("aboutDesc");
+                if (aboutTitle) aboutTitle.textContent = "👋 معلومات عني";
+                if (aboutDesc) aboutDesc.textContent = "مرحبًا، أنا عبدالرحمن، مبرمج شاب من مصر. أحب بناء تطبيقات الويب، تعلم تقنيات جديدة، وحل التحديات. هدفي أن أصبح مهندس برمجيات وألهم غيري.";
+
+                document.getElementById("projectsTitle").textContent = "مشاريعي";
+                document.getElementById("timelineTitle").textContent = "رحلة تعلمي";
+                document.getElementById("testiTitle").textContent = "آراء";
+                document.getElementById("contactTitle").textContent = "تواصل";
+                document.getElementById("downloadCV").textContent = "📥 تحميل السيرة الذاتية";
+                document.getElementById("projectsBtn").textContent = "عرض المشاريع";
+                document.getElementById("contactBtn").textContent = "📩 تواصل معي";
+                document.getElementById("location").textContent = "🌍 مصر";
+                searchInput.placeholder = "ابحث في المشاريع...";
+                downloadCV.href = "./Abdelrahman_Belall_CV_AR.pdf";
+            } else {
+                document.documentElement.lang = "en";
+                document.documentElement.dir = "ltr";
+                langBtn.textContent = "AR";
+                document.getElementById("name").textContent = "Abdelrahman Belall";
+                document.getElementById("subtitle").textContent = "Grade 6 Student • Young Programmer";
+
+                // hero: ensure heroName span exists
+                const heroNameEl = document.getElementById("heroName");
+                const heroNameText = heroNameEl ? heroNameEl.textContent || 'Abdelrahman' : 'Abdelrahman';
+                document.getElementById("heroTitle").innerHTML = `Hi, I'm <span id="heroName">${heroNameText}</span>`;
+                document.getElementById("heroText").textContent = "I build useful and fun web apps. I love learning new technologies and solving problems.";
+
+                // About
+                const aboutTitle = document.getElementById("aboutTitle");
+                const aboutDesc = document.getElementById("aboutDesc");
+                if (aboutTitle) aboutTitle.textContent = "👋 About Me";
+                if (aboutDesc) aboutDesc.textContent = "Hi, I'm Abdelrahman, a passionate young programmer from Egypt. I love building web apps, learning new technologies, and solving challenges. My dream is to become a professional Software Engineer and inspire other young people to code.";
+
+                document.getElementById("projectsTitle").textContent = "Projects";
+                document.getElementById("timelineTitle").textContent = "My Learning Journey";
+                document.getElementById("testiTitle").textContent = "Testimonials";
+                document.getElementById("contactTitle").textContent = "Contact";
+                document.getElementById("downloadCV").textContent = "📥 Download CV";
+                document.getElementById("projectsBtn").textContent = "See Projects";
+                document.getElementById("contactBtn").textContent = "📩 Contact Me";
+                document.getElementById("location").textContent = "🌍 Egypt";
+                searchInput.placeholder = "Search projects...";
+                downloadCV.href = "./Abdelrahman_Belall_CV.pdf";
+            }
+            localStorage.setItem("lang", LANG);
+            renderProjects();
+        }
+        langBtn.addEventListener("click", () => { LANG = LANG === "en" ? "ar" : "en"; applyLanguage(); });
+
+        /***** Projects rendering + filtering + search *****/
+        let activeFilter = "all";
+        function createProjectCard(p) {
+            const el = document.createElement("article");
+            el.className = "card fade-in";
+            el.dataset.cat = p.category;
+            const title = LANG === "ar" ? p.title_ar : p.title_en;
+            const desc = LANG === "ar" ? p.desc_ar : p.desc_en;
+            el.innerHTML = `
+        <div class="project-info">
+          <div class="project-title">${title}</div>
+          <div class="project-desc">${desc}</div>
+          <div class="tags"><span class="tag">${p.category}</span></div>
+          <div class="actions">
+            <a class="btn small demo" href="${p.demo}" target="_blank">${LANG === "ar" ? "عرض" : "Demo"}</a>
+            <a class="btn small ghost github" href="${p.github}" target="_blank">GitHub</a>
+          </div>
+        </div>
+      `;
+            return el;
+        }
+
+        function renderProjects() {
+            projectsGrid.innerHTML = "";
+            const q = searchInput.value.trim().toLowerCase();
+            const results = PROJECTS.filter(p => {
+                if (activeFilter !== "all" && p.category !== activeFilter) return false;
+                if (!q) return true;
+                const title = (LANG === "ar" ? p.title_ar : p.title_en).toLowerCase();
+                const desc = (LANG === "ar" ? p.desc_ar : p.desc_en).toLowerCase();
+                return title.includes(q) || desc.includes(q);
+            });
+            if (results.length === 0) {
+                const empty = document.createElement("div");
+                empty.textContent = LANG === "ar" ? "لا توجد مشاريع" : "No projects found";
+                empty.style.color = "var(--muted)"; projectsGrid.appendChild(empty);
+            } else {
+                results.forEach(r => projectsGrid.appendChild(createProjectCard(r)));
+                animateFadeIns();
+            }
+            // update stat
+        }
+
+        // filters
+        filters.addEventListener("click", (e) => {
+            const b = e.target.closest(".filter");
+            if (!b) return;
+            filters.querySelectorAll(".filter").forEach(x => x.classList.remove("active"));
+            b.classList.add("active");
+            activeFilter = b.dataset.filter;
+            renderProjects();
+        });
+
+        // search
+        searchInput.addEventListener("input", () => renderProjects());
+        document.getElementById("clearSearch").addEventListener("click", () => {
+            searchInput.value = ""; renderProjects();
+        });
+
+        /***** Scroll progress & reveal animations *****/
+        function updateProgress() {
+            const body = document.documentElement;
+            const scrolled = (window.scrollY) / (body.scrollHeight - window.innerHeight);
+            progressBar.style.width = Math.min(100, scrolled * 100) + "%";
+        }
+        window.addEventListener("scroll", updateProgress);
+        updateProgress();
+
+        function animateFadeIns() {
+            document.querySelectorAll(".fade-in").forEach((el, idx) => {
+                setTimeout(() => el.classList.add("visible"), idx * 80);
+            });
+            // animate cards individually
+            document.querySelectorAll(".card.fade-in").forEach((c, i) => {
+                setTimeout(() => c.classList.add("visible"), i * 90);
+            });
+        }
+
+        /***** Skills progress animation *****/
+        function animateSkills() {
+            document.querySelectorAll(".progress i").forEach(i => {
+                const w = i.dataset.width || "70%";
+                setTimeout(() => { i.style.width = w; }, 300);
+            });
+        }
+
+        /***** Counters for achievements *****/
+        function animateCounters() {
+            animateNumber("statProjects", 45, 800);
+            animateNumber("statSkills", 10, 800);
+            animateNumber("statCert", 5, 800);
+        }
+        function animateNumber(id, target, duration) {
+            const el = document.getElementById(id);
+            let start = 0;
+            const stepTime = Math.max(20, Math.floor(duration / target));
+            const timer = setInterval(() => {
+                start++;
+                el.textContent = start;
+                if (start >= target) clearInterval(timer);
+            }, stepTime);
+        }
+
+        /***** Typing effect in hero *****/
+        const typingPhrases = {
+            en: ["Grade 6 Student", "Young Programmer", "Future Software Engineer"],
+            ar: ["طالب في الصف السادس", "مبرمج شاب", "مهندس برمجيات مستقبلي"]
+        };
+        function startTyping() {
+            const el = document.getElementById("typingLine");
+            let i = 0, j = 0, deleting = false;
+            const loop = () => {
+                const words = typingPhrases[LANG] || typingPhrases.en;
+                const word = words[i];
+                if (!deleting) {
+                    el.textContent = word.slice(0, j + 1);
+                    j++;
+                    if (j === word.length) { deleting = true; setTimeout(loop, 900); return; }
+                } else {
+                    el.textContent = word.slice(0, j - 1);
+                    j--;
+                    if (j === 0) { deleting = false; i = (i + 1) % words.length; }
+                }
+                setTimeout(loop, deleting ? 70 : 110);
+            };
+            loop();
+        }
+
+        /***** Contact form (placeholder) *****/
+        const contactFormEl = document.getElementById("contactForm");
+        if (contactFormEl) {
+            contactFormEl.addEventListener("submit", e => {
+                e.preventDefault();
+                // Replace with EmailJS or Formspree integration later
+                const name = e.target.name.value;
+                // if emailjs is not set up this will silently skip (but keep structure)
+                if (window.emailjs) {
+                    emailjs.send("serviceID", "templateID", {
+                        from_name: e.target.name.value,
+                        from_email: e.target.email.value,
+                        message: e.target.message.value
+                    }, "publicKey")
+                        .then(() => {
+                            alert("✅ Message sent successfully!");
+                        }, (err) => {
+                            alert("❌ Failed to send: " + JSON.stringify(err));
+                        });
+                } else {
+                    // fallback: just show a success message for demo
+                    alert("✅ (Demo) Message prepared — setup emailjs/formspree to send real messages.");
+                }
+
+                e.target.reset();
+            });
+        }
+
+        /***** Init on load *****/
+        window.addEventListener("DOMContentLoaded", () => {
+            // apply saved language if any
+            LANG = localStorage.getItem("lang") || LANG;
+            applyLanguage();
+            renderProjects();
+            animateFadeIns();
+            animateSkills();
+            animateCounters();
+            startTyping();
+            // make initial visible
+            document.querySelectorAll(".fade-in").forEach(el => el.classList.add("visible"));
+        });
+
+        /***** Simple accessibility: keyboard shortcuts (T=theme, L=lang, / = search) *****/
+        window.addEventListener("keydown", (e) => {
+            if (e.key.toLowerCase() === "t") { themeBtn.click(); }
+            if (e.key.toLowerCase() === "l") { langBtn.click(); }
+            if (e.key === "/") { e.preventDefault(); searchInput.focus(); }
+        });
+
+        /***** Small helpers: project button actions *****/
+        document.getElementById("projectsBtn").addEventListener("click", () => { document.getElementById("projectsSection").scrollIntoView({ behavior: "smooth" }); });
+
+        // ensure progressive reveal on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add("visible");
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+        const translations = {
+            en: {
+                hero_title: "Welcome to My Portfolio",
+                hero_sub: "Discover my work, skills, and projects.",
+                about_title: "About Me",
+                about_desc: "I am a passionate web developer who loves building interactive and modern websites.",
+                projects_title: "Projects",
+                proj1_title: "Portfolio Website",
+                proj1_desc: "A responsive personal portfolio with dark/light mode and translations.",
+                proj2_title: "Quiz App",
+                proj2_desc: "A fun quiz game built with JavaScript and API integration.",
+                contact_title: "Contact Me",
+                contact_desc: "Feel free to reach out for collaborations or inquiries.",
+                video_title: "Promotional Video"
+            },
+            ar: {
+                hero_title: "مرحباً بكم في ملفي الشخصي",
+                hero_sub: "اكتشف أعمالي ومهاراتي ومشاريعي.",
+                about_title: "معلومات عني",
+                about_desc: "أنا مطور ويب شغوف أحب بناء مواقع تفاعلية وحديثة.",
+                projects_title: "المشاريع",
+                proj1_title: "موقع بورتفوليو",
+                proj1_desc: "ملف شخصي متجاوب مع وضع داكن/فاتح ودعم اللغات.",
+                proj2_title: "تطبيق أسئلة",
+                proj2_desc: "لعبة أسئلة ممتعة باستخدام JavaScript و API.",
+                contact_title: "تواصل معي",
+                contact_desc: "لا تتردد في التواصل معي للتعاون أو الاستفسارات.",
+                video_title: "الفيديو الترويجي"
+            }
+        };
+
+
+        function changeLang(lang) {
+            document.querySelectorAll("[data-i18n]").forEach(el => {
+                el.innerText = translations[lang][el.dataset.i18n];
+            });
+            document.body.dir = lang === "ar" ? "rtl" : "ltr";
+        }
+
+
+        function toggleTheme() {
+            if (document.body.getAttribute("data-theme") === "dark") {
+                document.body.removeAttribute("data-theme");
+            } else {
+                document.body.setAttribute("data-theme", "dark");
+            }
+        }
+        // Run initial animations + typing effect when page loads
+        window.addEventListener("DOMContentLoaded", () => {
+            applyLanguage();     // يطبق اللغة المختارة من localStorage
+            renderProjects();    // يرندر المشاريع
+            animateFadeIns();    // يظهر العناصر بتأثير fade-in
+            animateSkills();     // يحرك الـ progress bars بتاعة الـ skills
+            animateCounters();   // يحرك الأرقام في achievements
+            startTyping();       // يشغل الكتابة المتحركة في الهيرو
+        });
+
+    </script>
+</body>
+
+</html>
